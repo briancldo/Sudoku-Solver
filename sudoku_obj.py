@@ -10,7 +10,19 @@ class SudokuUnit:
 
 class SudokuGrid:
     def __init__(self, grid):
-        self.grid = [[SudokuUnit(unit) for unit in row] for row in grid]
+        self.num_unknown = 0
+        self.grid = []
+        self.rows = 9
+        self.cols = 9
+    
+        for row in grid:
+            converted_row = []
+            for val in row:
+                converted_row.append(SudokuUnit(val))
+                if val == 0:
+                    self.num_unknown += 1
+                    
+            self.grid.append(converted_row)
     
     def getCandidates(self, x, y):
         return self.grid[x][y].cand
@@ -21,3 +33,9 @@ class SudokuGrid:
     def removeCandidates(self, rem_cands, x, y):
         for c in rem_cands:
             self.grid[x][y].cand.remove(c)
+            
+    def setValue(self, val, x, y):
+        self.grid[x][y] = val
+    
+    def getValue(self, x, y):
+        return self.grid[x][y]

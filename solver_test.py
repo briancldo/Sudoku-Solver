@@ -26,10 +26,15 @@ def add_get_remove_candidates():
 tests['grid_convert'] = lambda: grid_convert()
 def grid_convert():
     filename = 'test_puzzle.sdk'
-    grid_correct = [[2, 0, 0, 1, 0, 5, 0, 0, 3], [0, 5, 4, 0, 0, 0, 7, 1, 0], [0, 1, 0, 2, 0, 3, 0, 8, 0], [6, 0, 2, 8, 0, 7, 3, 0, 4], [0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 5, 3, 0, 9, 8, 0, 6], [0, 2, 0, 7, 0, 1, 0, 6, 0], [0, 8, 1, 0, 0, 0, 2, 4, 0], [7, 0, 0, 4, 0, 2, 0, 0, 1]]
-    grid_eval = file_to_grid(filename)
     
-    assert grid_eval == grid_correct
+    grid_expected = [[2, 0, 0, 1, 0, 5, 0, 0, 3], [0, 5, 4, 0, 0, 0, 7, 1, 0], [0, 1, 0, 2, 0, 3, 0, 8, 0], [6, 0, 2, 8, 0, 7, 3, 0, 4], [0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 5, 3, 0, 9, 8, 0, 6], [0, 2, 0, 7, 0, 1, 0, 6, 0], [0, 8, 1, 0, 0, 0, 2, 4, 0], [7, 0, 0, 4, 0, 2, 0, 0, 1]]
+    grid_actual = file_to_grid(filename)
+    
+    num_unknown_expected = 45
+    num_unknown_actual = SudokuGrid(grid_actual).num_unknown
+    
+    assert grid_actual == grid_expected
+    #assert num_unknown_actual == num_unknown_expected
 
 
 
